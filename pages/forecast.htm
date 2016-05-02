@@ -1,0 +1,33 @@
+<p>
+    <a href="#/">Back to Search</a>   
+</p>
+
+<h1>Quick Forecast for {{ city }}!</h1> <!--interpolated-->
+
+<hr />
+<i><strong>For How Many Days Would You Like Your Forecast?:  </strong></i> <a href="#/forecast/2" style="font-size: 20px"; ng-class="{ 'bg-primary': days ==='2'}">2</a>
+| <a href="#/forecast/5" style="font-size: 20px"; ng-class="{ 'bg-primary': days ==='5'}">5</a>
+| <a href="#/forecast/7" style="font-size: 20px"; ng-class="{ 'bg-primary': days ==='7'}">7</font-size></a>
+<hr />
+<div ng-repeat="w in weatherResult.list">
+    <div class="row"><!--bootstrap needs a div for row followed by div for col-->
+        <div class="col-md-12"></div><!-- col must add up to 12 across the row-->
+            <div class="panel panel-info"><!-- panel-info is for the blue color-->
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ convertToDate(w.dt) | date: 'MMM d, y' }}</h3><!-- standard date notations under Agular JS "filter" service-->
+                </div>
+                <div class="panel-body">
+                    Daytime temp: <strong>{{ convertToFahrenheit(w.temp.day) }}&nbsp&#8457</strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Nighttime temp: <strong>{{ convertToFahrenheit(w.temp.night) }}&nbsp&#8457</strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Pressure: <strong>{{ convertHpaToInhg(w.pressure) }}&nbspinHg</strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Humidity: <strong>{{ w.humidity }}&#37</strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Clouds: <strong>{{ w.clouds }}&#37</strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    Weather: <strong>{{ w.weather[0].description }}</strong>&nbsp&nbsp&nbsp&nbsp
+                     <img ng-src="http://openweathermap.org/img/w/{{ w.weather[0].icon }}.png" />
+                    <!-- from http://www.sharepointpals.com/post/How-to-create-a-weather-widget-using-Angular-Js-and-open-weather-map/-->                
+                    <!-- fromhttp://bugs.openweathermap.org/projects/api/wiki/Weather_Condition_Codes-->            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
